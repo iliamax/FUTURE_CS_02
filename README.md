@@ -1,72 +1,106 @@
-# FUTURE_CS_02
-# Setting Up a Firewall
-
-Step-by-Step Procedure: Parrot OS Firewall Setup
-Below is a detailed procedure for setting up and managing a firewall in Parrot OS, limiting and allowing traffic, and ensuring robust documentation.
-
-1. Setting Up a Firewall in Parrot OS
-Step 1: Verify Firewall Installation
-
-Open a terminal in Parrot OS.
-Check if ufw (Uncomplicated Firewall) is installed:
-bash
-Copy code
-sudo ufw status
-If ufw is not installed, install it:
-bash
-Copy code
+Firewall Setup Project Documentation
+Firewall Setup Project Documentation
+1. Purpose and Types of Firewalls
+A firewall acts as a barrier to control network traffic, ensuring only authorized communications occur between
+trusted internal networks and untrusted external networks.
+Types of Firewalls:
+- Network-Based Firewalls: Protect entire networks by monitoring and filtering traffic at the network level.
+- Host-Based Firewalls: Secure individual devices by controlling incoming and outgoing traffic specific to that
+device.
+2. Getting Started
+Prerequisites:
+1. Environment:
+- A virtual machine (e.g., VirtualBox, VMware) or physical machine with Parrot OS installed.
+2. User Permissions:
+- Administrative/root access to configure firewall rules.
+3. Networking Knowledge:
+- Familiarity with basic networking concepts, including IP addresses and ports.
+3. Setup Instructions
+Step 1: Clone the Repository:
+Run the following commands to clone the repository containing resources for this project:
+Page 1
+Firewall Setup Project Documentation
+```
+git clone https://github.com/iliamax/firewall-setup.git
+cd firewall-setup
+```
+Step 2: Install Required Tools:
+Install `ufw` (Uncomplicated Firewall) for managing firewall rules:
+```
 sudo apt update
-sudo apt install ufw
-Step 2: Enable the Firewall
-
-Enable ufw to protect the system:
-bash
-Copy code
+sudo apt install ufw -y
+```
+4. Configuring Firewall Rules
+Step 1: Enable the Firewall:
+Activate the firewall to start managing traffic:
+```
 sudo ufw enable
-Step 3: Check the Status
-
-Verify the firewall status:
-bash
-Copy code
-sudo ufw status verbose
-2. Limiting and Allowing Traffic
-Step 1: Allow Specific Traffic
-
-Allow SSH traffic:
-bash
-Copy code
+```
+Step 2: Allow Specific Traffic:
+To allow traffic to a service or port, use:
+```
+sudo ufw allow <service/port>
+```
+Page 2
+Firewall Setup Project Documentation
+Examples:
+- Allow SSH traffic:
+```
 sudo ufw allow ssh
-Allow traffic on a specific port, e.g., HTTP (port 80):
-bash
-Copy code
-sudo ufw allow 80/tcp
-Step 2: Block Specific Traffic
-
-Block traffic from a specific IP:
-bash
-Copy code
-sudo ufw deny from 192.168.1.100
-Block a specific port, e.g., FTP (port 21):
-bash
-Copy code
-sudo ufw deny 21/tcp
-Step 3: Set Default Policies
-
-Deny all incoming traffic by default:
-bash
-Copy code
-sudo ufw default deny incoming
-Allow all outgoing traffic by default:
-bash
-Copy code
-sudo ufw default allow outgoing
-Step 4: Advanced Rule Management
-
-Limit connections on a port to prevent brute-force attacks:
-bash
-Copy code
+```
+- Allow HTTP traffic:
+```
+sudo ufw allow 80
+```
+Step 3: Deny Specific Traffic:
+To block unwanted traffic:
+```
+sudo ufw deny <service/port>
+```
+Example:
+- Block a specific IP address:
+```
+sudo ufw deny from <IP>
+```
+Step 4: Limit Traffic:
+To prevent abuse, use the `limit` rule:
+```
+sudo ufw limit <service/port>
+Page 3
+Firewall Setup Project Documentation
+```
+Example:
+- Limit SSH login attempts:
+```
 sudo ufw limit ssh
-Allow traffic only for a specific subnet:
-bash
-Copy code
-sudo ufw allow from 192.168.1.0/24 to any port 22
+```
+Step 5: View and Manage Rules:
+- List all active rules:
+```
+sudo ufw status numbered
+```
+- Remove a rule by its number:
+```
+sudo ufw delete <rule_number>
+```
+5. Contributing
+How to Contribute:
+1. Fork the repository.
+2. Create a branch for your feature or fix:
+```
+git checkout -b feature-name
+```
+Page 4
+Firewall Setup Project Documentation
+3. Commit your changes:
+```
+git commit -m 'Add feature-name'
+```
+4. Push to your fork:
+```
+git push origin feature-name
+```
+5. Create a pull request.
+6. License
+This project is licensed under the MIT License. Refer to the LICENSE file for details.
+Page 5
