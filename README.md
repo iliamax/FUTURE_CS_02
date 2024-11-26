@@ -1,37 +1,72 @@
 # FUTURE_CS_02
 # Setting Up a Firewall
 
-## Project Overview
+Step-by-Step Procedure: Parrot OS Firewall Setup
+Below is a detailed procedure for setting up and managing a firewall in Parrot OS, limiting and allowing traffic, and ensuring robust documentation.
 
-This project aims to establish a firewall to enhance network security. It focuses on understanding the purpose of firewalls, exploring the different types, and implementing a basic firewall configuration on a virtual machine or network. Participants will configure firewall rules to allow or block specific traffic, ensuring that only authorized communications are permitted.
+1. Setting Up a Firewall in Parrot OS
+Step 1: Verify Firewall Installation
 
-## Table of Contents
+Open a terminal in Parrot OS.
+Check if ufw (Uncomplicated Firewall) is installed:
+bash
+Copy code
+sudo ufw status
+If ufw is not installed, install it:
+bash
+Copy code
+sudo apt update
+sudo apt install ufw
+Step 2: Enable the Firewall
 
-- [Purpose and Types of Firewalls](#purpose-and-types-of-firewalls)
-- [Getting Started](#getting-started)
-- [Setup Instructions](#setup-instructions)
-- [Configuring Firewall Rules](#configuring-firewall-rules)
-- [Contributing](#contributing)
-- [License](#license)
+Enable ufw to protect the system:
+bash
+Copy code
+sudo ufw enable
+Step 3: Check the Status
 
-## Purpose and Types of Firewalls
+Verify the firewall status:
+bash
+Copy code
+sudo ufw status verbose
+2. Limiting and Allowing Traffic
+Step 1: Allow Specific Traffic
 
-A firewall serves as a barrier between trusted internal networks and untrusted external networks, helping to prevent unauthorized access and attacks. The main types of firewalls include:
+Allow SSH traffic:
+bash
+Copy code
+sudo ufw allow ssh
+Allow traffic on a specific port, e.g., HTTP (port 80):
+bash
+Copy code
+sudo ufw allow 80/tcp
+Step 2: Block Specific Traffic
 
-- **Network-based Firewalls**: Protect entire networks by monitoring traffic at the network level.
-- **Host-based Firewalls**: Secure individual devices by controlling traffic to and from them.
+Block traffic from a specific IP:
+bash
+Copy code
+sudo ufw deny from 192.168.1.100
+Block a specific port, e.g., FTP (port 21):
+bash
+Copy code
+sudo ufw deny 21/tcp
+Step 3: Set Default Policies
 
-## Getting Started
+Deny all incoming traffic by default:
+bash
+Copy code
+sudo ufw default deny incoming
+Allow all outgoing traffic by default:
+bash
+Copy code
+sudo ufw default allow outgoing
+Step 4: Advanced Rule Management
 
-To get started with this project, you will need:
-
-- A virtual machine or physical server environment.
-- Administrative/root access to set up firewall configurations.
-- Basic knowledge of networking concepts.
-
-## Setup Instructions
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/iliamax/firewall-setup.git
-   cd firewall-setup
+Limit connections on a port to prevent brute-force attacks:
+bash
+Copy code
+sudo ufw limit ssh
+Allow traffic only for a specific subnet:
+bash
+Copy code
+sudo ufw allow from 192.168.1.0/24 to any port 22
