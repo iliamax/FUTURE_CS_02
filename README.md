@@ -33,5 +33,5 @@ To get started with this project, you will need:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/firewall-setup.git
+   git clone https://github.com/iliamax/firewall-setup.git
    cd firewall-setup
